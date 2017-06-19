@@ -65,16 +65,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnClickAPI(View view){
         Toast.makeText(this, "TEST", Toast.LENGTH_SHORT).show();
-        final TextView text = (TextView) findViewById(R.id.textView);
+        final TextView textView = (TextView) findViewById(R.id.textView);
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 String strURL = "https://api.github.com/";
                 String strFinalResponse = "";
-                String key = "";
-                String value = "";
-                String newText = key + " : "+ value;
+                String key;
+                String value;
+                String newText;
 
                 URL githubEndpoint = null;
 
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                HttpsURLConnection myConnection = null;
+                HttpsURLConnection myConnection;
 
                 try {
                     myConnection = (HttpsURLConnection)githubEndpoint.openConnection();
@@ -109,13 +109,11 @@ public class MainActivity extends AppCompatActivity {
 
                             jsonReader.skipValue(); // Skip values of other keys
                         }
-                        text.setText( strFinalResponse );
+                        textView.setText( strFinalResponse );
 
                         jsonReader.close();
                         myConnection.disconnect();
 
-                    } else {
-                        // Error handling code goes here
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
